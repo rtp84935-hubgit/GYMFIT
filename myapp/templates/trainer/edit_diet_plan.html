@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Diet Plan</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI',sans-serif;
+        }
+
+        body{
+            background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:40px;
+        }
+
+        .card-box{
+            width:100%;
+            max-width:750px;
+            background:rgba(255,255,255,.08);
+            backdrop-filter:blur(12px);
+            border:1px solid rgba(255,255,255,.15);
+            border-radius:20px;
+            padding:40px;
+            color:white;
+            box-shadow:0 15px 35px rgba(0,0,0,.3);
+        }
+
+        h2{
+            text-align:center;
+            margin-bottom:35px;
+            font-weight:bold;
+        }
+
+        h2 i{
+            color:#00d084;
+            margin-right:10px;
+        }
+
+        label{
+            font-weight:600;
+            margin-bottom:8px;
+        }
+
+        .form-control,
+        .form-select{
+            background:rgba(255,255,255,.12);
+            color:white;
+            border:none;
+            padding:12px;
+        }
+
+        .form-control:focus,
+        .form-select:focus{
+            background:rgba(255,255,255,.18);
+            color:white;
+            border:1px solid #00d084;
+            box-shadow:none;
+        }
+
+        .form-control::placeholder{
+            color:#ddd;
+        }
+
+        .form-select option{
+            color:black;
+        }
+
+        textarea{
+            resize:none;
+        }
+
+        .btn-save{
+            background:#00d084;
+            color:white;
+            border:none;
+            padding:12px 35px;
+            border-radius:30px;
+            font-weight:600;
+        }
+
+        .btn-save:hover{
+            background:#00b36b;
+        }
+
+        .btn-reset{
+            background:#ff9800;
+            color:white;
+            border:none;
+            padding:12px 35px;
+            border-radius:30px;
+            margin-left:10px;
+        }
+
+        .btn-reset:hover{
+            background:#e68900;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="card-box">
+
+    <h2>
+        <i class="fas fa-pen-to-square"></i>
+        Edit Diet Plan
+    </h2>
+
+    <form id="form">
+
+        {% csrf_token %}
+
+        <div class="mb-4">
+            <label>
+                <i class="fas fa-calendar-alt"></i>
+                Diet Plan Date
+            </label>
+
+            <input
+                type="date"
+                id="date"
+                name="date"
+                class="form-control"
+                value="{{ diet.date|date:'Y-m-d' }}"
+                required>
+        </div>
+
+        <div class="mb-4">
+
+            <label>Select Client</label>
+
+            <select name="client" id="client" class="form-select" required>
+
+                {% for i in client %}
+
+                <option value="{{ i.CLIENT.id }}"
+                {% if i.CLIENT.id == diet.CLIENT.id %}selected{% endif %}>
+
+                    {{ i.CLIENT.cname }}
+
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+        </div>
+
+        <div class="mb-4">
+
+            <label>Diet Plan</label>
+
+            <textarea
+                id="dietplan"
+                name="dietplan"
+                rows="12"
+                class="form-control"
+                required>{{ diet.dietplan }}</textarea>
+
+        </div>
+
+        <div class="text-center">
+
+            <button type="submit" class="btn btn-save">
+                <i class="fas fa-save"></i>
+                Update Diet Plan
+            </button>
+
+            <button type="reset" class="btn btn-reset">
+                <i class="fas fa-rotate-left"></i>
+                Reset
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+<script>
+
+$(document).ready(function(){
+
+    $("#form").submit(function(e){
+
+        e.preventDefault();
+
+        $.ajax({
+
+            url:"/myapp/edit_diet_plan_post/{{ diet.id }}/",
+
+            type:"POST",
+
+            data:{
+                client:$("#client").val(),
+                date:$("#date").val(),
+                dietplan:$("#dietplan").val(),
+                csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val()
+            },
+
+            success:function(response){
+
+                if(response.status=="ok"){
+
+                    alert("Diet Plan Updated Successfully");
+
+                    window.location.href="/myapp/view_diet_trainer/";
+
+                }
+
+                else{
+
+                    alert("Something went wrong.");
+
+                }
+
+            }
+
+        });
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>

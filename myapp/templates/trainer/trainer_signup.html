@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainer Signup</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .65);
+            backdrop-filter: blur(4px);
+        }
+
+        .signup-card {
+            position: relative;
+            width: 650px;
+            background: rgba(255, 255, 255, .08);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, .15);
+            border-radius: 20px;
+            padding: 40px;
+            color: white;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, .4);
+            animation: fadeUp 1s ease;
+        }
+
+        @keyframes fadeUp {
+
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        h2 {
+            text-align: center;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .sub {
+            text-align: center;
+            color: #ddd;
+            margin-bottom: 30px;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, .12);
+            border: none;
+            color: white;
+            height: 48px;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, .15);
+            color: white;
+            box-shadow: none;
+            border: 1px solid #ff4b2b;
+        }
+
+        .form-control::placeholder {
+            color: #ccc;
+        }
+
+        label {
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .btn-signup {
+            width: 100%;
+            height: 50px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(45deg, #ff512f, #dd2476);
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            transition: .4s;
+        }
+
+        .btn-signup:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 80, 60, .5);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .login-link a {
+            color: #ffb703;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .icon {
+            font-size: 55px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="signup-card">
+
+        <div class="icon">
+            🏋️
+        </div>
+
+        <h2>Trainer Registration</h2>
+
+        <p class="sub">
+            Become a certified trainer and inspire fitness.
+        </p>
+
+        <form id="form">
+            {%csrf_token%}
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <label>Trainer Name</label>
+                    <input type="text" class="form-control" id="tname" name="tname" placeholder="Enter full name">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Trainer Name</label>
+                    <input type="file" class="form-control" id="photo" name="photo" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label>Age</label>
+                    <input type="number" class="form-control" id="tage" name="tage" placeholder="Enter age">
+                </div>
+
+            </div>
+
+            <div class="mb-3">
+                <label>Place</label>
+                <input type="text" class="form-control" name="tplace" id="tplace" placeholder="Enter your place">
+            </div>
+
+            <div class="mb-3">
+                <label>specification</label>
+                <input type="text" class="form-control" name="specification" id="specification"
+                    placeholder="Enter your place">
+            </div>
+            <div class="mb-3">
+                <label>Experience</label>
+                <input type="text" class="form-control" name="experience" id="experience"
+                    placeholder="Enter your place">
+            </div>
+            <div class="mb-3">
+                <label>Email</label>
+                <input type="email" class="form-control" name="temail" id="temail" placeholder="Enter email address">
+                <span id="msg" style="color: red;"></span>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <label>Password</label>
+                    <input type="password" class="form-control" id="password" name="password"
+                        placeholder="Create password">
+                    <span id="msg2" style="color: red;"></span>
+                </div>
+
+            </div>
+            <span id="msg3" style="color: red;"></span>
+
+            <button class="btn btn-signup mt-3">
+                Register Trainer
+            </button>
+
+        </form>
+
+        <div class="login-link">
+            Already have an account?
+            <a href="/myapp/login/">Login</a>
+        </div>
+
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#temail').keyup(function () {
+                $.ajax({
+                    url: '/myapp/check_email/',
+                    method: 'GET',
+                    data: {
+                        'temail': $('#temail').val()
+                    }, success: function (response) {
+                        if (response.status == 'yes') {
+                            $('#msg').html('username already used ! try another')
+                        }
+                        else {
+                            $('#msg').html(' ')
+                        }
+                    }
+
+                })
+            })
+            $('#form').submit(function (e) {
+                e.preventDefault();
+
+                let formData = new FormData();
+
+                formData.append('tname', $('#tname').val());
+                formData.append('tage', $('#tage').val());
+                formData.append('tplace', $('#tplace').val());
+                formData.append('temail', $('#temail').val());
+                formData.append('password', $('#password').val());
+                formData.append('specification', $('#specification').val());
+                formData.append('experience', $('#experience').val());
+
+                // Upload file
+                formData.append('photo', $('#photo')[0].files[0]);
+
+                formData.append(
+                    'csrfmiddlewaretoken',
+                    $('input[name=csrfmiddlewaretoken]').val()
+                );
+
+                $.ajax({
+                    url: '/myapp/trainer_signup_post/',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,   // Important
+                    contentType: false,   // Important
+                    success: function (response) {
+                        if (response.status == 'yes') {
+                            alert('You have created an account as trainer');
+                            window.location.href = '/myapp/login/';
+                        }
+                        else {
+                            $('#msg3').html('Try another username');
+                        }
+                    }
+                });
+            });
+       
+        $('#password').keyup(function () {
+            let pass = $('#password').val()
+            if (pass.length < 4) {
+                $("#msg2").html('password mustbe minimum 4 charecters..!')
+            }
+            else {
+                $("#msg2").html('')
+            }
+        })
+
+    })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GYMFIT — Transform Your Body, Transform Your Life</title>
+  <meta name="description" content="GYMFIT client dashboard — workouts, diet plans, trainers, and progress tracking.">
+
+  <!-- Google Fonts: Space Grotesk (display), Inter (body), JetBrains Mono (data/stats) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="/static/style.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+  <!-- ===================== LOADING SPINNER ===================== -->
+  <div id="preloader" aria-hidden="true">
+    <div class="pulse-loader">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <p class="loader-text">LOADING GYMFIT</p>
+  </div>
+
+  <!-- ===================== FLOATING BACKGROUND ICONS ===================== -->
+  <div class="floating-icons" aria-hidden="true">
+    <i class="fa-solid fa-dumbbell"></i>
+    <i class="fa-solid fa-heart-pulse"></i>
+    <i class="fa-solid fa-fire"></i>
+    <i class="fa-solid fa-bolt"></i>
+    <i class="fa-solid fa-person-running"></i>
+  </div>
+
+  <!-- ===================== STICKY NAVIGATION ===================== -->
+  <nav class="navbar navbar-expand-lg fixed-top gymfit-nav" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="#home">GYM<span>FIT</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+        aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="toggler-icon"><i class="fa-solid fa-bars"></i></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#dashboard">My Status</a></li>
+          <li class="nav-item"><a class="nav-link" href="#workouts">Workout Plans</a></li>
+          <li class="nav-item"><a class="nav-link" href="#diet">Diet Plans</a></li>
+          <li class="nav-item"><a class="nav-link" href="#membership">Membership</a></li>
+          <li class="nav-item"><a class="nav-link" href="#trainers">Trainers</a></li>
+          <li class="nav-item"><a class="nav-link" href="#progress">Progress</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="/myapp/client_viewprofile/">Profile</a></li>
+
+          <li class="nav-item ms-lg-2">
+            <a class="btn btn-logout" href="/myapp/logout/"><i class="fa-solid fa-right-from-bracket me-1"></i>Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===================== HERO SECTION ===================== -->
+  <header class="hero" id="home">
+    <div class="hero-bg" id="heroParallax"
+      style="background-image:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1920&q=80');">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-scanline"></div>
+
+    <div class="container hero-content">
+      <p class="eyebrow"><span class="eyebrow-dot"></span>YOUR JOURNEY STARTS NOW</p>
+      <h1 class="hero-title">
+        <span id="typedHeading"></span><span class="cursor">|</span>
+      </h1>
+      <p class="hero-subtitle">Consistency beats intensity. Show up today, and every day after —<br
+          class="d-none d-md-block"> your future self is already thanking you.</p>
+      <div class="hero-actions">
+        <a href="#dashboard" class="btn btn-glow-primary ripple">
+          <i class="fa-solid fa-bolt me-2"></i>Join Today's Workout
+        </a>
+        <a href="#workouts" class="btn btn-outline-glow ripple">
+          Explore Plans
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="counter" data-target="12400">0</span><span class="stat-suffix">+</span>
+          <p>Active Members</p>
+        </div>
+        <div class="hero-stat">
+          <span class="counter" data-target="86">0</span><span class="stat-suffix">%</span>
+          <p>Goal Success Rate</p>
+        </div>
+        <div class="hero-stat">
+          <span class="counter" data-target="24">0</span><span class="stat-suffix">/7</span>
+          <p>Trainer Support</p>
+        </div>
+      </div>
+    </div>
+
+    <a href="#dashboard" class="scroll-indicator" aria-label="Scroll down">
+      <i class="fa-solid fa-chevron-down"></i>
+    </a>
+  </header>
+
+  <!-- ===================== DASHBOARD CARDS SECTION ===================== -->
+  <section class="section-dark" id="dashboard">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="section-tag">// MY PROFILE</p>
+        <h2>Today's <span class="text-accent-lime">Dashboard</span></h2>
+        <p class="section-desc">A live snapshot of where your body stands right now.</p>
+      </div>
+
+      <div class="row g-4">
+
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="dash-card">
+            <div class="dash-icon icon-orange"><i class="fa-solid fa-dumbbell fa-bounce-slow"></i></div>
+            <h3>Today's Workout</h3>
+            <p class="dash-value">Upper Body Push</p>
+            <p class="dash-sub">45 min · 6 exercises</p>
+            <div class="dash-progress">
+              <div class="dash-progress-fill" style="width:60%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="dash-card">
+            <div class="dash-icon icon-lime"><i class="fa-solid fa-fire fa-flicker"></i></div>
+            <h3>Calories Burned</h3>
+            <p class="dash-value"><span class="counter" data-target="742">0</span> kcal</p>
+            <p class="dash-sub">Goal: 900 kcal</p>
+            <div class="dash-progress">
+              <div class="dash-progress-fill lime" style="width:82%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="dash-card">
+            <div class="dash-icon icon-blue"><i class="fa-solid fa-calendar-days"></i></div>
+            <h3>Next Session</h3>
+            <p class="dash-value">Tomorrow, 7:00 AM</p>
+            <p class="dash-sub">With Coach Arjun · Strength</p>
+            <div class="dash-progress">
+              <div class="dash-progress-fill blue" style="width:40%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="dash-card">
+            <div class="dash-icon icon-orange"><i class="fa-solid fa-chart-line"></i></div>
+            <h3>BMI</h3>
+            <p class="dash-value"><span class="counter" data-target="22" data-decimals="1">0</span></p>
+            <p class="dash-sub">Normal range · Healthy</p>
+            <div class="dash-progress">
+              <div class="dash-progress-fill" style="width:55%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="dash-card">
+            <div class="dash-icon icon-red"><i class="fa-solid fa-heart-pulse fa-heartbeat-anim"></i></div>
+            <h3>Heart Rate</h3>
+            <p class="dash-value"><span class="counter" data-target="72">0</span> bpm</p>
+            <p class="dash-sub">Resting · Excellent</p>
+            <div class="dash-progress">
+              <div class="dash-progress-fill red" style="width:70%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="dash-card">
+            <div class="dash-icon icon-lime"><i class="fa-solid fa-trophy"></i></div>
+            <h3>Fitness Score</h3>
+            <p class="dash-value"><span class="counter" data-target="88">0</span>/100</p>
+            <p class="dash-sub">Top 15% this month</p>
+            <div class="dash-progress">
+              <div class="dash-progress-fill lime" style="width:88%"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== WORKOUT PLANS SECTION ===================== -->
+  <section class="section-charcoal" id="workouts">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="section-tag">// TRAINING</p>
+        <h2>Workout <span class="text-accent-orange">Plans</span></h2>
+        <p class="section-desc">Structured programs for every goal — pick your path.</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Workout Card Template x6 -->
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="workout-card">
+            <div class="workout-img"
+              style="background-image:url('https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=800&q=80')">
+            </div>
+            <div class="workout-body">
+              <span class="workout-badge">Strength</span>
+              <h3>Strength Training</h3>
+              <p>Build raw power with progressive overload across compound lifts.</p>
+              <a href="#" class="btn btn-view-plan ripple">View Plan <i class="fa-solid fa-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="workout-card">
+            <div class="workout-img"
+              style="background-image:url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80')">
+            </div>
+            <div class="workout-body">
+              <span class="workout-badge">Cardio</span>
+              <h3>Cardio</h3>
+              <p>Boost endurance and heart health with dynamic conditioning circuits.</p>
+              <a href="#" class="btn btn-view-plan ripple">View Plan <i class="fa-solid fa-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="workout-card">
+            <div class="workout-img"
+              style="background-image:url('https://images.unsplash.com/photo-1517960413843-0aee8e2b3285?auto=format&fit=crop&w=800&q=80')">
+            </div>
+            <div class="workout-body">
+              <span class="workout-badge">Fat Loss</span>
+              <h3>Fat Loss</h3>
+              <p>High-output metabolic sessions designed to burn and keep burning.</p>
+              <a href="#" class="btn btn-view-plan ripple">View Plan <i class="fa-solid fa-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="workout-card">
+            <div class="workout-img"
+              style="background-image:url('https://images.unsplash.com/photo-1584863231364-2edc166de576?auto=format&fit=crop&w=800&q=80')">
+            </div>
+            <div class="workout-body">
+              <span class="workout-badge">Muscle</span>
+              <h3>Muscle Gain</h3>
+              <p>Hypertrophy-focused splits to pack on lean, functional mass.</p>
+              <a href="#" class="btn btn-view-plan ripple">View Plan <i class="fa-solid fa-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="workout-card">
+            <div class="workout-img"
+              style="background-image:url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80')">
+            </div>
+            <div class="workout-body">
+              <span class="workout-badge">Recovery</span>
+              <h3>Yoga</h3>
+              <p>Improve mobility, breath control, and mental clarity between sessions.</p>
+              <a href="#" class="btn btn-view-plan ripple">View Plan <i class="fa-solid fa-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="workout-card">
+            <div class="workout-img"
+              style="background-image:url('https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?auto=format&fit=crop&w=800&q=80')">
+            </div>
+            <div class="workout-body">
+              <span class="workout-badge">HIIT</span>
+              <h3>HIIT</h3>
+              <p>Short, brutal, effective — maximum results in minimum time.</p>
+              <a href="#" class="btn btn-view-plan ripple">View Plan <i class="fa-solid fa-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== DIET PLANS SECTION ===================== -->
+  <section class="section-dark" id="diet">
+    <div class="container">
+
+        <div class="section-heading reveal">
+            <p class="section-tag">// MY DIET PLAN</p>
+            <h2>Today's <span class="text-accent-lime">Nutrition Plan</span></h2>
+            <p class="section-desc">
+                Follow the personalized diet plan prepared by your trainer.
+            </p>
+        </div>
+
+        <div class="row g-4">
+
+            {% for i in diet %}
+
+            <div class="col-lg-6 reveal">
+
+                <div class="meal-card h-100">
+
+                    <div class="meal-body">
+
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+
+                            <h3>
+                                <i class="fa-solid fa-utensils text-accent-lime"></i>
+                                Diet Plan {{ forloop.counter }}
+                            </h3>
+
+                            <span class="badge bg-success fs-6">
+                                {{ i.date|date:"d M Y" }}
+                            </span>
+
+                        </div>
+
+                        <!-- Trainer Information -->
+                        <div class="mb-3">
+                            <span class="badge bg-primary fs-6">
+                                <i class="fa-solid fa-user-tie"></i>
+                                Trainer: {{ i.TRAINER.tname }}
+                            </span>
+                        </div>
+
+                        <hr style="border-color:rgba(255,255,255,.15);">
+
+                        <div class="diet-content">
+                            {{ i.dietplan|linebreaks }}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="col-12">
+
+                <div class="meal-card text-center p-5">
+
+                    <i class="fa-solid fa-bowl-food"
+                       style="font-size:70px;color:#8ef58d;"></i>
+
+                    <h3 class="mt-4">
+                        No Diet Plan Available
+                    </h3>
+
+                    <p class="text-muted">
+                        Your trainer hasn't assigned a diet plan yet.
+                        Please check back later.
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+  <!-- ===================== TRAINERS SECTION ===================== -->
+  <style>
+    #trainers {
+      padding: 80px 8%;
+      background: #111827;
+    }
+
+    .trainer-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .trainer-card {
+      width: 300px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 22px;
+      padding: 30px 25px;
+      text-align: center;
+      color: #fff;
+      transition: .4s;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, .35);
+    }
+
+    .trainer-card::before {
+      content: "";
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 180px;
+      height: 180px;
+      background: linear-gradient(45deg, #ff512f, #dd2476);
+      border-radius: 50%;
+      opacity: .25;
+    }
+
+    .trainer-card:hover {
+      transform: translateY(-12px) scale(1.03);
+      box-shadow: 0 20px 40px rgba(255, 81, 47, .35);
+    }
+
+    .trainer-card img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid #ff512f;
+      margin-bottom: 20px;
+      transition: .4s;
+    }
+
+    .trainer-card:hover img {
+      transform: scale(1.08) rotate(3deg);
+    }
+
+    .trainer-card h3 {
+      margin: 10px 0 5px;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .trainer-card .badge {
+      display: inline-block;
+      padding: 7px 18px;
+      border-radius: 50px;
+      background: linear-gradient(45deg, #ff512f, #dd2476);
+      color: #fff;
+      font-size: 13px;
+      margin: 12px 0;
+    }
+
+    .info {
+      margin-top: 18px;
+      text-align: left;
+    }
+
+    .info p {
+      margin: 10px 0;
+      font-size: 15px;
+      color: #ddd;
+    }
+
+    .info span {
+      color: #ffb347;
+      font-weight: 600;
+    }
+    .admission-btn{
+    display:inline-block;
+    width:100%;
+    margin-top:22px;
+    padding:12px 20px;
+    border-radius:12px;
+    text-decoration:none;
+    font-size:16px;
+    font-weight:600;
+    color:#fff;
+    background:linear-gradient(135deg,#ff512f,#dd2476);
+    transition:all .35s ease;
+    box-shadow:0 8px 20px rgba(255,81,47,.35);
+}
+
+.admission-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 14px 30px rgba(255,81,47,.5);
+    color:#fff;
+}
+
+.admission-btn:active{
+    transform:scale(.98);
+}
+<style>
+.search-box{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    margin-bottom:35px;
+}
+
+.search-box input{
+    width:450px;
+    max-width:90%;
+    padding:12px 20px;
+    border-radius:30px;
+    border:2px solid #00d4ff;
+    background:#1b263b;
+    color:white;
+    font-size:16px;
+    outline:none;
+    transition:.3s;
+}
+
+.search-box input::placeholder{
+    color:#bfc9d1;
+}
+
+.search-box input:focus{
+    border-color:#00ffb3;
+    box-shadow:0 0 15px rgba(0,255,179,.5);
+}
+
+</style>
+  </style>
+<h3 align="center">Trainer Functions<br></h3>
+  <section class="section-charcoal" id="trainers">
+    <div class="search-box text-center mb-4">
+    <input type="text" id="name" name="trainerSearch" class="form-control"
+           placeholder="🔍 Search Trainer by Name or Specialization..."
+           onkeyup="searchTrainer()">
+</div>
+
+
+
+      
+  <div class="trainer-container">
+    {% include 'client/view_trainer_cards.html' %}
+</div>
+    
+
+  </section>
+  
+
+  <!-- ===================== PROGRESS SECTION (Animated Circular Rings) ===================== -->
+<section class="section-dark" id="progress">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="section-tag">// TRAINER INSIGHTS</p>
+      <h2>Tips from Your <span class="text-accent-lime">Trainers</span></h2>
+      <p class="section-desc">A little guidance, straight from the people who know you best.</p>
+    </div>
+
+    <div class="row g-4">
+      {% for tip in tips %}
+      <div class="col-12 col-lg-6 reveal">
+        <div class="tip-card h-100">
+          <div class="tip-quote-mark">"</div>
+          <p class="tip-text">{{ tip.tip }}</p>
+          <div class="tip-meta">
+            <div class="tip-avatar">{{ tip.TRAINER.tname|slice:":1" }}</div>
+            <div class="tip-meta-text">
+              <span class="tip-trainer">{{ tip.TRAINER.tname }}</span>
+              <span class="tip-date">{{ tip.date|date:"M d, Y" }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12">
+        <p class="text-center tip-empty">No tips available yet.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+.tip-card {
+  position: relative;
+  background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 2.5rem 2rem 2rem;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.tip-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-lime, #c6ff3d), var(--accent-blue, #3dd6ff));
+  opacity: 0.8;
+}
+
+.tip-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(198, 255, 61, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.tip-quote-mark {
+  position: absolute;
+  top: 0.5rem;
+  right: 1.5rem;
+  font-size: 5rem;
+  line-height: 1;
+  font-family: Georgia, serif;
+  color: rgba(255,255,255,0.06);
+  pointer-events: none;
+}
+
+.tip-text {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.85);
+  font-style: italic;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.tip-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 1.2rem;
+}
+
+.tip-avatar {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #0a0a0a;
+  background: linear-gradient(135deg, var(--accent-lime, #c6ff3d), var(--accent-blue, #3dd6ff));
+  text-transform: uppercase;
+}
+
+.tip-meta-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.tip-trainer {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #fff;
+}
+
+.tip-date {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.5);
+  margin-top: 0.15rem;
+}
+
+.tip-empty {
+  color: rgba(255,255,255,0.5);
+  padding: 2rem 0;
+}
+.plan-price-sub{
+  font-size:.82rem;
+  color:#9a9a9a;
+  margin-top:-4px;
+  margin-bottom:18px;
+}
+.plan-duration-field{
+  margin:22px 0 16px;
+}
+.plan-duration-field label{
+  display:block;
+  font-size:.78rem;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:#9a9a9a;
+  margin-bottom:8px;
+}
+.duration-select{
+  width:100%;
+  background:#101010;
+  border:1px solid rgba(255,255,255,0.12);
+  color:#f2f2f2;
+  padding:12px 14px;
+  border-radius:10px;
+  font-size:.95rem;
+  appearance:none;
+  cursor:pointer;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%23ff8c42' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  transition:border-color .15s;
+}
+.duration-select:focus{
+  outline:none;
+  border-color:var(--accent-orange, #ff8c42);
+}
+/* ===== Premium card shell ===== */
+.premium-card{
+  display:grid;
+  grid-template-columns:1fr 1px 1.15fr;
+  background:#1b1b1b;
+  border:1px solid rgba(255,140,66,0.35);
+  border-radius:20px;
+  box-shadow:0 0 40px -10px rgba(255,140,66,0.18);
+  overflow:hidden;
+}
+.premium-left{
+  padding:38px 34px;
+  display:flex;
+  flex-direction:column;
+}
+.premium-divider{ background:rgba(255,255,255,0.08); }
+.premium-right{ padding:38px 34px; }
+
+/* ===== Identity / price ===== */
+.plan-badge{
+  display:inline-flex;
+  align-items:center;
+  align-self:flex-start;
+  background:rgba(255,140,66,0.15);
+  color:#ff8c42;
+  border:1px solid rgba(255,140,66,0.4);
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:.5px;
+  padding:6px 14px;
+  border-radius:100px;
+  margin-bottom:18px;
+}
+.plan-name{
+  font-size:1.5rem;
+  font-weight:800;
+  letter-spacing:1px;
+  color:#fff;
+  margin-bottom:14px;
+}
+.plan-price{
+  font-size:2.6rem;
+  font-weight:800;
+  color:#fff;
+  margin-bottom:2px;
+}
+.plan-price span{ font-size:1rem; font-weight:400; color:#9a9a9a; }
+.plan-price-sub{ font-size:.85rem; color:#9a9a9a; margin-bottom:16px; }
+.plan-tagline{ font-size:.92rem; color:#c9c9c9; margin-bottom:26px; line-height:1.5; }
+
+/* ===== Duration + form ===== */
+.premium-form{ margin-top:auto; }
+.plan-duration-field label{
+  display:block;
+  font-size:.75rem;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:#9a9a9a;
+  margin-bottom:8px;
+}
+.duration-select{
+  width:100%;
+  background:#101010;
+  border:1px solid rgba(255,255,255,0.12);
+  color:#f2f2f2;
+  padding:12px 14px;
+  border-radius:10px;
+  font-size:.95rem;
+  appearance:none;
+  cursor:pointer;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%23ff8c42' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  transition:border-color .15s;
+}
+.duration-select:focus{ outline:none; border-color:#ff8c42; }
+
+.premium-secure{
+  margin-top:16px;
+  font-size:.78rem;
+  color:#9a9a9a;
+  text-align:center;
+}
+
+/* ===== Feature checklist ===== */
+.plan-features-grid{
+  list-style:none;
+  padding:0;
+  margin:0 0 30px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px 18px;
+}
+.plan-features-grid li{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:.88rem;
+  color:#e6e6e6;
+}
+.icon-medal{
+  width:30px; height:30px; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  border-radius:8px;
+  background:rgba(255,140,66,0.12);
+  color:#ff8c42;
+  font-size:.8rem;
+}
+.member-status{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  align-self:flex-start;
+  background:rgba(76,217,100,0.12);
+  color:#4cd964;
+  border:1px solid rgba(76,217,100,0.35);
+  font-size:.82rem;
+  font-weight:700;
+  padding:8px 16px;
+  border-radius:100px;
+  margin-bottom:18px;
+}
+.status-dot{
+  width:8px; height:8px;
+  border-radius:50%;
+  background:#4cd964;
+  box-shadow:0 0 8px #4cd964;
+  flex-shrink:0;
+}
+
+.member-quickrow{
+  display:flex;
+  gap:10px;
+  margin:22px 0 4px;
+}
+.qr-item{
+  flex:1;
+  background:#141414;
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:12px;
+  padding:14px 8px;
+  text-align:center;
+}
+.qr-item i{
+  color:#ff8c42;
+  font-size:1.1rem;
+  display:block;
+  margin-bottom:8px;
+}
+.qr-item span{
+  color:#c9c9c9;
+  font-size:.72rem;
+  display:block;
+  line-height:1.3;
+}
+
+@media (max-width: 480px){
+  .member-quickrow{ flex-direction:column; }
+}
+
+/* ===== Video library ===== */
+.video-library{
+  background:#141414;
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:14px;
+  padding:20px;
+}
+.video-library h6{
+  color:#ff8c42;
+  font-size:.85rem;
+  letter-spacing:.5px;
+  margin-bottom:16px;
+}
+.video-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:12px;
+}
+.video-item{
+  background:#1b1b1b;
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:10px;
+  padding:14px 6px;
+  text-align:center;
+  transition:border-color .2s, transform .2s;
+}
+.video-item:hover{ border-color:rgba(255,140,66,0.4); transform:translateY(-2px); }
+.video-item i{ color:#ff8c42; font-size:1.1rem; margin-bottom:8px; display:block; }
+.video-item small{ color:#c9c9c9; font-size:.72rem; }
+
+/* ===== Stats row ===== */
+.stat-tile{
+  background:#1b1b1b;
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:14px;
+  padding:24px 12px;
+  height:100%;
+}
+/* ===== Expired state badge ===== */
+.membership-expired{ position:relative; opacity:0.92; }
+.expired-badge{
+  position:absolute;
+  top:20px; right:20px;
+  background:rgba(255,107,94,0.15);
+  color:#ff6b5e;
+  border:1px solid rgba(255,107,94,0.4);
+  font-size:.72rem;
+  font-weight:700;
+  padding:6px 14px;
+  border-radius:100px;
+  z-index:2;
+}
+.text-danger-soft{ color:#ff6b5e !important; }
+
+/* ===== Premium card shell ===== */
+.premium-card{
+  display:grid;
+  grid-template-columns:1fr 1px 1.15fr;
+  background:#1b1b1b;
+  border:1px solid rgba(255,140,66,0.35);
+  border-radius:20px;
+  box-shadow:0 0 40px -10px rgba(255,140,66,0.18);
+  overflow:hidden;
+}
+.premium-left{ padding:38px 34px; display:flex; flex-direction:column; }
+.premium-divider{ background:rgba(255,255,255,0.08); }
+.premium-right{ padding:38px 34px; }
+
+.plan-badge{
+  display:inline-flex; align-items:center; align-self:flex-start;
+  background:rgba(255,140,66,0.15); color:#ff8c42;
+  border:1px solid rgba(255,140,66,0.4);
+  font-size:.72rem; font-weight:700; letter-spacing:.5px;
+  padding:6px 14px; border-radius:100px; margin-bottom:18px;
+}
+.plan-name{ font-size:1.5rem; font-weight:800; letter-spacing:1px; color:#fff; margin-bottom:14px; }
+.plan-price{ font-size:2.6rem; font-weight:800; color:#fff; margin-bottom:2px; }
+.plan-price span{ font-size:1rem; font-weight:400; color:#9a9a9a; }
+.plan-price-sub{ font-size:.85rem; color:#9a9a9a; margin-bottom:16px; }
+.plan-tagline{ font-size:.92rem; color:#c9c9c9; margin-bottom:26px; line-height:1.5; }
+
+.premium-form{ margin-top:auto; }
+.plan-duration-field label{
+  display:block; font-size:.75rem; letter-spacing:1px; text-transform:uppercase;
+  color:#9a9a9a; margin-bottom:8px;
+}
+.duration-select{
+  width:100%; background:#101010; border:1px solid rgba(255,255,255,0.12);
+  color:#f2f2f2; padding:12px 14px; border-radius:10px; font-size:.95rem;
+  appearance:none; cursor:pointer;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%23ff8c42' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat:no-repeat; background-position:right 14px center;
+  transition:border-color .15s;
+}
+.duration-select:focus{ outline:none; border-color:#ff8c42; }
+.premium-secure{ margin-top:16px; font-size:.78rem; color:#9a9a9a; text-align:center; }
+
+/* ===== Active member status ===== */
+.member-status{
+  display:inline-flex; align-items:center; gap:8px; align-self:flex-start;
+  background:rgba(76,217,100,0.12); color:#4cd964;
+  border:1px solid rgba(76,217,100,0.35);
+  font-size:.82rem; font-weight:700; padding:8px 16px;
+  border-radius:100px; margin-bottom:18px;
+}
+.status-dot{ width:8px; height:8px; border-radius:50%; background:#4cd964; box-shadow:0 0 8px #4cd964; flex-shrink:0; }
+.member-quickrow{ display:flex; gap:10px; margin:22px 0 4px; }
+.qr-item{
+  flex:1; background:#141414; border:1px solid rgba(255,255,255,0.08);
+  border-radius:12px; padding:14px 8px; text-align:center;
+}
+.qr-item i{ color:#ff8c42; font-size:1.1rem; display:block; margin-bottom:8px; }
+.qr-item span{ color:#c9c9c9; font-size:.72rem; display:block; line-height:1.3; }
+
+/* ===== Feature checklist ===== */
+.plan-features-grid{
+  list-style:none; padding:0; margin:0 0 30px;
+  display:grid; grid-template-columns:1fr 1fr; gap:14px 18px;
+}
+.plan-features-grid li{ display:flex; align-items:center; gap:10px; font-size:.88rem; color:#e6e6e6; }
+.icon-medal{
+  width:30px; height:30px; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  border-radius:8px; background:rgba(255,140,66,0.12); color:#ff8c42; font-size:.8rem;
+}
+
+/* ===== Video library ===== */
+.video-library{ background:#141414; border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:20px; }
+.video-library h6{ color:#ff8c42; font-size:.85rem; letter-spacing:.5px; margin-bottom:16px; }
+.video-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; }
+.video-item{
+  background:#1b1b1b; border:1px solid rgba(255,255,255,0.06); border-radius:10px;
+  padding:14px 6px; text-align:center; transition:border-color .2s, transform .2s;
+}
+.video-item:hover{ border-color:rgba(255,140,66,0.4); transform:translateY(-2px); }
+.video-item i{ color:#ff8c42; font-size:1.1rem; margin-bottom:8px; display:block; }
+.video-item small{ color:#c9c9c9; font-size:.72rem; }
+
+/* ===== Stats row ===== */
+.stat-tile{ background:#1b1b1b; border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:24px 12px; height:100%; }
+.stat-tile i{ color:#ff8c42; font-size:1.5rem; margin-bottom:10px; display:block; }
+.stat-tile h6{ color:#fff; font-size:.92rem; margin-bottom:4px; }
+.stat-tile small{ color:#9a9a9a; }
+
+.plan-footnote{ text-align:center; color:#9a9a9a; font-size:.85rem; }
+
+@media (max-width: 991px){
+  .premium-card{ grid-template-columns:1fr; }
+  .premium-divider{ height:1px; width:100%; }
+  .plan-features-grid{ grid-template-columns:1fr; }
+}
+@media (max-width: 480px){
+  .member-quickrow{ flex-direction:column; }
+}
+.stat-tile i{ color:#ff8c42; font-size:1.5rem; margin-bottom:10px; display:block; }
+.stat-tile h6{ color:#fff; font-size:.92rem; margin-bottom:4px; }
+.stat-tile small{ color:#9a9a9a; }
+
+.plan-footnote{ text-align:center; color:#9a9a9a; font-size:.85rem; }
+
+/* ===== Responsive ===== */
+@media (max-width: 991px){
+  .premium-card{ grid-template-columns:1fr; }
+  .premium-divider{ height:1px; width:100%; }
+  .plan-features-grid{ grid-template-columns:1fr; }
+  .video-grid{ grid-template-columns:repeat(3, 1fr); }
+}
+</style>
+
+  <!-- ===================== MOTIVATIONAL QUOTE SECTION ===================== -->
+  <section class="quote-section" id="motivation">
+    <div class="quote-bg"
+      style="background-image:url('https://images.unsplash.com/photo-1517963879433-6ad2b056d712?auto=format&fit=crop&w=1920&q=80');">
+    </div>
+    <div class="quote-overlay"></div>
+    <div class="container">
+      <div class="quote-wrap">
+        <i class="fa-solid fa-quote-left quote-icon"></i>
+        <p class="quote-text" id="quoteText">Discipline is choosing between what you want now and what you want most.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MEMBERSHIP SECTION ===================== -->
+  {% if status == 'expired' %}
+
+  <section class="section-charcoal" id="membership">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="section-tag">// YOUR ACCESS</p>
+        <h2>Membership <span class="text-accent-orange">Card</span></h2>
+        <p class="section-desc">Everything your access pass unlocks, in one place.</p>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9 reveal">
+          <div class="membership-card membership-expired">
+            <div class="membership-shine"></div>
+
+            <span class="expired-badge">
+              <i class="fa-solid fa-triangle-exclamation me-1"></i> Expired
+            </span>
+
+            <div class="membership-top">
+              <div>
+                <p class="membership-brand">GYM<span>FIT</span></p>
+                <p class="membership-type"><i class="fa-solid fa-crown me-1"></i>GOLD MEMBER</p>
+              </div>
+              <div class="qr-placeholder" aria-label="QR code placeholder">
+                <i class="fa-solid fa-qrcode"></i>
+              </div>
+            </div>
+
+            <div class="membership-mid">
+              <p class="member-name">Aditya Sharma</p>
+              <p class="member-id">MEMBER ID · GF-2026-08841</p>
+            </div>
+
+            <div class="membership-bottom">
+              <div>
+                <span class="label">Valid Since</span>
+                <span class="value">Jan 2025</span>
+              </div>
+              <div>
+                <span class="label">Expiry Date</span>
+                <span class="value text-danger-soft">31 Dec 2026</span>
+              </div>
+              <a href="/myapp/renew_membership/" class="btn btn-glow-primary ripple btn-sm">
+                <i class="fa-solid fa-rotate-right me-2"></i>Renew Membership
+              </a>
+            </div>
+          </div>
+
+          <p class="plan-footnote reveal mt-4">
+            <i class="fa-solid fa-circle-info me-2 text-warning"></i>
+            Your access is paused. Renew now to restore full gym access instantly.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% elif status == 'no' %}
+
+  <section class="section-charcoal" id="membership">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="section-tag">// YOUR ACCESS</p>
+        <h2>Upgrade to <span class="text-accent-orange">Premium</span></h2>
+        <p class="section-desc">
+          Unlock exclusive fitness features, expert guidance, premium workout videos,
+          and personalized plans to reach your goals faster.
+        </p>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-10 reveal">
+          <div class="premium-card">
+
+            <!-- LEFT: identity + price + duration + CTA -->
+            <div class="premium-left">
+              <span class="plan-badge">
+                <i class="fa-solid fa-crown me-1"></i> Premium Membership
+              </span>
+
+              <p class="plan-name">FITZONE PREMIUM</p>
+
+              <p class="plan-price" id="planPrice">₹2,499<span>/mo</span></p>
+              <p class="plan-price-sub" id="planPriceSub">Billed ₹7,497 every 3 months</p>
+
+              <p class="plan-tagline">
+                Everything you need for your complete fitness journey.
+              </p>
+
+              <!-- DON'T CHANGE THIS FORM -->
+              <form action="/myapp/Membership/" method="post" class="premium-form">
+                {% csrf_token %}
+
+                <div class="plan-duration-field">
+                  <label for="duration">Choose duration</label>
+                  <select id="duration" name="duration" class="duration-select">
+                    <option value="3" data-monthly="2499" data-total="7497">
+                      3 Months
+                    </option>
+                    <option value="6" data-monthly="2249" data-total="13494" selected>
+                      6 Months — Save 10%
+                    </option>
+                    <option value="12" data-monthly="1999" data-total="23988">
+                      1 Year — Save 20%
+                    </option>
+                  </select>
+                </div>
+
+                <!-- DON'T CHANGE THIS BUTTON -->
+                <button class="btn btn-glow-primary ripple btn-sm w-100 mt-3">
+                  <i class="fa-solid fa-crown me-2"></i>
+                  Get Premium Membership
+                </button>
+              </form>
+
+              <p class="premium-secure">
+                <i class="fa-solid fa-shield-heart me-2 text-success"></i>
+                Secure payment • Instant activation • Cancel anytime
+              </p>
+            </div>
+
+            <div class="premium-divider"></div>
+
+            <!-- RIGHT: what's included -->
+            <div class="premium-right">
+              <ul class="plan-features plan-features-grid">
+                <li><span class="icon-medal"><i class="fa-solid fa-dumbbell"></i></span> Unlimited Gym Access</li>
+                <li><span class="icon-medal"><i class="fa-solid fa-user-check"></i></span> Dedicated Personal Trainer</li>
+                <li><span class="icon-medal"><i class="fa-solid fa-utensils"></i></span> Personalized Diet Plan</li>
+                <li><span class="icon-medal"><i class="fa-solid fa-video"></i></span> Premium Workout Videos</li>
+                <li><span class="icon-medal"><i class="fa-solid fa-calendar-check"></i></span> Weekly Fitness Programs</li>
+                <li><span class="icon-medal"><i class="fa-solid fa-chart-line"></i></span> Progress & BMI Tracking</li>
+                <li><span class="icon-medal"><i class="fa-solid fa-file-pdf"></i></span> Downloadable Diet PDFs</li>
+                <li><span class="icon-medal"><i class="fa-solid fa-comments"></i></span> Priority Trainer Support</li>
+                <li><span class="icon-medal"><i class="fa-solid fa-medal"></i></span> Monthly Fitness Assessment</li>
+                <li><span class="icon-medal"><i class="fa-solid fa-star"></i></span> Early Access to New Features</li>
+              </ul>
+
+              <div class="video-library">
+                <h6><i class="fa-solid fa-play-circle me-2"></i>Premium Video Library</h6>
+                <div class="video-grid">
+                  <div class="video-item"><i class="fa-solid fa-fire"></i><small>Fat Loss</small></div>
+                  <div class="video-item"><i class="fa-solid fa-dumbbell"></i><small>Muscle Gain</small></div>
+                  <div class="video-item"><i class="fa-solid fa-heart-pulse"></i><small>Cardio</small></div>
+                  <div class="video-item"><i class="fa-solid fa-person-running"></i><small>HIIT</small></div>
+                  <div class="video-item"><i class="fa-solid fa-spa"></i><small>Yoga</small></div>
+                  <div class="video-item"><i class="fa-solid fa-child-reaching"></i><small>Stretching</small></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-5 text-center reveal g-4">
+        <div class="col-md-3 col-6">
+          <div class="stat-tile">
+            <i class="fa-solid fa-video"></i>
+            <h6>100+ Videos</h6>
+            <small>Expert-led sessions</small>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-tile">
+            <i class="fa-solid fa-user-tie"></i>
+            <h6>1-on-1 Trainer</h6>
+            <small>Personal guidance</small>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-tile">
+            <i class="fa-solid fa-chart-column"></i>
+            <h6>Progress Reports</h6>
+            <small>Track every milestone</small>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-tile">
+            <i class="fa-solid fa-medal"></i>
+            <h6>Premium Benefits</h6>
+            <small>Exclusive member perks</small>
+          </div>
+        </div>
+      </div>
+
+      <p class="plan-footnote reveal mt-4">
+        <i class="fa-solid fa-shield-heart me-2 text-success"></i>
+        Secure payment • Instant activation • Cancel anytime
+      </p>
+    </div>
+  </section>
+
+{% else %}
+
+  <section class="section-charcoal" id="membership">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="section-tag">// YOUR ACCESS</p>
+        <h2>You're <span class="text-accent-orange">Premium</span></h2>
+        <p class="section-desc">Your membership is active — everything below is unlocked for you.</p>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-10 reveal">
+          <div class="premium-card">
+
+            <!-- LEFT: active status + CTA -->
+            <div class="premium-left">
+              <span class="plan-badge">
+                <i class="fa-solid fa-crown me-1"></i> Premium Membership
+              </span>
+
+              <p class="plan-name">FITZONE PREMIUM</p>
+
+              <div class="member-status">
+                <span class="status-dot"></span>
+                You're a Premium Member
+              </div>
+
+              <p class="plan-tagline">
+                Your membership is active. Everything on the right is unlocked for you.
+              </p>
+
+              <div class="member-quickrow">
+                <div class="qr-item">
+                  <i class="fa-solid fa-video"></i>
+                  <span>100+ videos</span>
+                </div>
+                <div class="qr-item">
+                  <i class="fa-solid fa-user-tie"></i>
+                  <span>Personal trainer</span>
+                </div>
+                <div class="qr-item">
+                  <i class="fa-solid fa-chart-line"></i>
+                  <span>Progress tracking</span>
+                </div>
+              </div>
+
+              <a href="/myapp/view_premium_video/" class="btn btn-glow-primary ripple btn-sm w-100 mt-3">
+                <i class="fa-solid fa-crown me-2"></i>
+                View Premium Benefits
+              </a>
+
+              <p class="premium-secure">
+                <i class="fa-solid fa-circle-check me-2 text-success"></i>
+                Active plan • Renews automatically
+              </p>
+            </div>
+
+            <div class="premium-divider"></div>
+
+            <!-- RIGHT: what's included -->
+            <div class="premium-right">
+              <ul class="plan-features plan-features-grid">
+                <li><span class="icon-medal"><i class="fa-solid fa-dumbbell"></i></span> Unlimited Gym Access</li>
+                <li><span class="icon-medal"><i class="fa-solid fa-user-check"></i></span> Dedicated Personal Trainer</li>
+                <li><span class="icon-medal"><i class="fa-solid fa-utensils"></i></span> Personalized Diet Plan</li>
+                <li><span class="icon-medal"><i class="fa-solid fa-video"></i></span> Premium Workout Videos</li>
+                <li><span class="icon-medal"><i class="fa-solid fa-calendar-check"></i></span> Weekly Fitness Programs</li>
+                <li><span class="icon-medal"><i class="fa-solid fa-chart-line"></i></span> Progress & BMI Tracking</li>
+                <li><span class="icon-medal"><i class="fa-solid fa-file-pdf"></i></span> Downloadable Diet PDFs</li>
+                <li><span class="icon-medal"><i class="fa-solid fa-comments"></i></span> Priority Trainer Support</li>
+                <li><span class="icon-medal"><i class="fa-solid fa-medal"></i></span> Monthly Fitness Assessment</li>
+                <li><span class="icon-medal"><i class="fa-solid fa-star"></i></span> Early Access to New Features</li>
+              </ul>
+
+              <div class="video-library">
+                <h6><i class="fa-solid fa-play-circle me-2"></i>Premium Video Library</h6>
+                <div class="video-grid">
+                  <div class="video-item"><i class="fa-solid fa-fire"></i><small>Fat Loss</small></div>
+                  <div class="video-item"><i class="fa-solid fa-dumbbell"></i><small>Muscle Gain</small></div>
+                  <div class="video-item"><i class="fa-solid fa-heart-pulse"></i><small>Cardio</small></div>
+                  <div class="video-item"><i class="fa-solid fa-person-running"></i><small>HIIT</small></div>
+                  <div class="video-item"><i class="fa-solid fa-spa"></i><small>Yoga</small></div>
+                  <div class="video-item"><i class="fa-solid fa-child-reaching"></i><small>Stretching</small></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-5 text-center reveal g-4">
+        <div class="col-md-3 col-6">
+          <div class="stat-tile">
+            <i class="fa-solid fa-video"></i>
+            <h6>100+ Videos</h6>
+            <small>Expert-led sessions</small>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-tile">
+            <i class="fa-solid fa-user-tie"></i>
+            <h6>1-on-1 Trainer</h6>
+            <small>Personal guidance</small>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-tile">
+            <i class="fa-solid fa-chart-column"></i>
+            <h6>Progress Reports</h6>
+            <small>Track every milestone</small>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-tile">
+            <i class="fa-solid fa-medal"></i>
+            <h6>Premium Benefits</h6>
+            <small>Exclusive member perks</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endif %}
+        
+
+  <!-- ===================== TESTIMONIALS SECTION ===================== -->
+  <section class="section-dark" id="testimonials">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="section-tag">// SUCCESS STORIES</p>
+        <h2>Member <span class="text-accent-lime">Testimonials</span></h2>
+      </div>
+
+      <div id="testimonialCarousel" class="carousel slide reveal" data-bs-ride="carousel" data-bs-interval="4500">
+        <div class="carousel-inner">
+
+          <div class="carousel-item active">
+            <div class="testimonial-card mx-auto">
+              <img src="https://randomuser.me/api/portraits/women/21.jpg" alt="Priya Nair" class="testimonial-photo">
+              <div class="trainer-rating justify-content-center"><i class="fa-solid fa-star"></i><i
+                  class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                  class="fa-solid fa-star"></i></div>
+              <p class="testimonial-text">"GYMFIT completely changed how I approach training. Down 12kg and stronger
+                than I've ever been."</p>
+              <p class="testimonial-name">Priya Nair</p>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="testimonial-card mx-auto">
+              <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Karan Verma" class="testimonial-photo">
+              <div class="trainer-rating justify-content-center"><i class="fa-solid fa-star"></i><i
+                  class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                  class="fa-solid fa-star-half-stroke"></i></div>
+              <p class="testimonial-text">"The trainers actually care. My strength numbers have doubled in six months."
+              </p>
+              <p class="testimonial-name">Karan Verma</p>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="testimonial-card mx-auto">
+              <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="Meera Iyer" class="testimonial-photo">
+              <div class="trainer-rating justify-content-center"><i class="fa-solid fa-star"></i><i
+                  class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                  class="fa-solid fa-star"></i></div>
+              <p class="testimonial-text">"The diet plans made nutrition simple for the first time in my life. No more
+                guessing."</p>
+              <p class="testimonial-name">Meera Iyer</p>
+            </div>
+          </div>
+
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+          <span class="carousel-nav-icon"><i class="fa-solid fa-chevron-left"></i></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+          <span class="carousel-nav-icon"><i class="fa-solid fa-chevron-right"></i></span>
+        </button>
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active"></button>
+          <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1"></button>
+          <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer id="contact">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <p class="footer-logo">GYM<span>FIT</span></p>
+          <p class="footer-about">Your dedicated training partner — plans, tracking, and coaching in one dashboard.</p>
+          <div class="social-icons">
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#workouts">Workout Plans</a></li>
+            <li><a href="#diet">Diet Plans</a></li>
+            <li><a href="#trainers">Trainers</a></li>
+            <li><a href="#membership">Membership</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h4>Contact Info</h4>
+          <ul class="footer-contact">
+            <li><i class="fa-solid fa-location-dot"></i> 12 Iron Street, Kozhikode, KL</li>
+            <li><i class="fa-solid fa-phone"></i> +91 98765 43210</li>
+            <li><i class="fa-solid fa-envelope"></i> hello@gymfit.app</li>
+            <li><i class="fa-solid fa-clock"></i> Mon–Sun · 5:00 AM – 11:00 PM</li>
+          </ul>
+        </div>
+      </div>
+
+
+
+        <div class="col-md-4">
+          <h4>Contact Info</h4>
+          <ul class="footer-contact">
+            <li><i class="fa-solid fa-location-dot"></i> 12 Iron Street, Kozhikode, KL</li>
+            <li><i class="fa-solid fa-phone"></i> +91 98765 43210</li>
+            <li><i class="fa-solid fa-envelope"></i> hello@gymfit.app</li>
+            <li><i class="fa-solid fa-clock"></i> Mon–Sun · 5:00 AM – 11:00 PM</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr>
+      <p class="copyright">&copy; <span id="year"></span> GYMFIT. All rights reserved. Built for people who show up.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom Script -->
+  <script src="/static/script.js"></script>
+</body>
+<script>
+$(document).ready(function () {
+
+    $('#name').keyup(function () {
+
+        $.ajax({
+            url: '/myapp/searchtrainer/',
+            type: 'GET',
+            data: {
+                name: $(this).val()
+            },
+           success: function(response){
+    $('.trainer-container').html(response);
+}
+        });
+
+    });
+
+});
+
+</script>
+<script>
+  const durationSelect = document.getElementById('duration');
+  const planPrice = document.getElementById('planPrice');
+  const planPriceSub = document.getElementById('planPriceSub');
+
+  function updatePlanPrice(){
+    const opt = durationSelect.options[durationSelect.selectedIndex];
+    const monthly = parseInt(opt.dataset.monthly, 10);
+    const total = parseInt(opt.dataset.total, 10);
+    const months = opt.value;
+
+    planPrice.innerHTML = `₹${monthly.toLocaleString('en-IN')}<span>/mo</span>`;
+    planPriceSub.textContent = `Billed ₹${total.toLocaleString('en-IN')} every ${months} months`;
+  }
+
+  durationSelect.addEventListener('change', updatePlanPrice);
+  updatePlanPrice();
+
+</script>
+<script>
+  const durationSelect = document.getElementById('duration');
+  const planPrice = document.getElementById('planPrice');
+  const planPriceSub = document.getElementById('planPriceSub');
+
+  function updatePlanPrice(){
+    const opt = durationSelect.options[durationSelect.selectedIndex];
+    const monthly = parseInt(opt.dataset.monthly, 10);
+    const total = parseInt(opt.dataset.total, 10);
+    const months = opt.value;
+
+    planPrice.innerHTML = `₹${monthly.toLocaleString('en-IN')}<span>/mo</span>`;
+    planPriceSub.textContent = `Billed ₹${total.toLocaleString('en-IN')} every ${months} months`;
+  }
+
+  durationSelect.addEventListener('change', updatePlanPrice);
+  updatePlanPrice();
+</script>
+</html>

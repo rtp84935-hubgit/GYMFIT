@@ -1,0 +1,67 @@
+<!-- {% for i in trainer %}
+<div class="trainer-card">
+    <img src="{{ i.photo.url }}" alt="{{ i.tname }}">
+    <h3>{{ i.tname }}</h3>
+    <div class="badge">Professional Trainer</div>
+    <div class="info">
+        <p><span>🏋 Specialization:</span> {{ i.specification }}</p>
+        <p><span>⭐ Experience:</span> {{ i.experience }}</p>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    {% for j in requests %}
+        {% if j.status == 'pending' %}
+            <span style="color: yellow;">Wait for Trainer response</span>
+        {% elif j.status == 'accepted' %}
+            <span style="color: green;">{{ i.tname }} has accepted your admission request</span>
+        {% elif j.status == 'rejected' %}
+            <span style="color: red;">{{ i.tname }} has rejected your admission request</span>
+        {% else %}
+            <a href="/myapp/send_admission_request/{{ i.id }}" id="admission" class="admission-btn">
+                Take Admission
+            </a>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endfor %} -->
+{% for i in trainer %}
+<div class="trainer-card">
+
+    <img src="{{ i.photo.url }}" alt="{{ i.tname }}">
+    <h3>{{ i.tname }}</h3>
+
+    <div class="badge">Professional Trainer</div>
+
+    <div class="info">
+        <p><span>🏋 Specialization:</span> {{ i.specification }}</p>
+        <p><span>⭐ Experience:</span> {{ i.experience }}</p>
+    </div>
+
+    {% if i.request %}
+
+        {% if i.request.status == "pending" %}
+            <span style="color:orange;">Waiting for Trainer Response</span>
+
+        {% elif i.request.status == "accepted" %}
+            <span style="color:green;">{{ i.tname }} accepted your admission request.</span>
+
+        {% elif i.request.status == "rejected" %}
+            <span style="color:red;">{{ i.tname }} rejected your admission request.</span>
+
+        {% endif %}
+
+    {% else %}
+
+        <a href="/myapp/send_admission_request/{{ i.id }}" class="admission-btn">
+            Take Admission
+        </a>
+
+    {% endif %}
+
+</div>
+{% endfor %}
